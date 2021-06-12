@@ -31,6 +31,7 @@ exports.add = (req, res)=> { // 새로운 ToDo 항목 추가하기
     };
 
     todo.contents = req.body.contents;
+    console.log(req.body.contents);
 
     fs.readFile('./todo_list.json', {
         'encoding': 'utf8'

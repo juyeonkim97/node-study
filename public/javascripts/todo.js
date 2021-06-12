@@ -1,7 +1,7 @@
-$(document).ready(() => {
-    var get_list = () => {
+$(function () {
+    var get_list = function () {
         $.ajax('/list', {
-            'success': (list) => {
+            'success': function (list) {
                 var trs = '';
 
                 list = JSON.parse(list).list;
@@ -9,7 +9,7 @@ $(document).ready(() => {
                 for (var i = 0, len = list.length; i < len; i++) { // 테이블 내용 만들기
                     trs += '<tr>' +
                         '<td>' + (i + 1) + '</td>' +
-                        '<td>' + list[i].contents + '</td>' +
+                        '<td class="' + (list[i].complete ? 'complete' : '') + '">' + list[i].contents + '</td>' + // 취소선 클래스
                         '<td><button type="button" class="btn btn-success">완료</button></td>' +
                         '<td><button type="button" class="btn btn-danger">삭제</button></td>' +
                         '</tr>';
@@ -22,7 +22,7 @@ $(document).ready(() => {
 
     get_list();
 
-    $('.form-inline button').click(() => { // 새로운 할 일 추가하기
+    $('.form-inline').on('click', '.btn', function () { // 새로운 할 일 추가하기
         $.ajax('/add', {
             'method': 'POST',
             'data': {
@@ -31,7 +31,8 @@ $(document).ready(() => {
             'success': get_list
         });
     });
-    $('tbody').on('click', '.btn-success', () => { // 선택한 할 일 완료하기
+
+    $('tbody').on('click', '.btn-success', function () { // 선택한 할 일 완료하기
         $.ajax('/complete', {
             'method': 'POST',
             'data': {
@@ -41,7 +42,7 @@ $(document).ready(() => {
         });
     });
 
-    $('tbody').on('click', '.btn-danger', () => { // 선택한 할 일 삭제하기
+    $('tbody').on('click', '.btn-danger', function () { // 선택한 할 일 삭제하기
         $.ajax('/del', {
             'method': 'POST',
             'data': {

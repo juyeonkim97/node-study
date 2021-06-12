@@ -1,9 +1,8 @@
 {
   "dependencies": {
+    "body-parser": "^1.19.0",
     "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "morgan": "^1.10.0",
-    "serve-favicon": "^2.5.0"
+    "express": "^4.17.1"
   },
   "name": "vue-proj",
   "description": "node.js와 vue.js를 이용하여 설문조사 시스템 만들기",
